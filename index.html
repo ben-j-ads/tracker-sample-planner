@@ -113,6 +113,14 @@
     .tbl-wrap { overflow-x: auto; }
     @media (max-width: 520px) { .barrow { grid-template-columns: 90px 1fr 56px; } }
 
+
+    /* polish: aligned inputs, chart label halo, next-step link */
+    .inputs, .adv { align-items: end; }
+    #chart .cap { paint-order: stroke; stroke: var(--paper-raised); stroke-width: 4px; stroke-linejoin: round; }
+    .next-step { border: 1px solid var(--rule); border-left: 4px solid var(--ink); background: var(--paper-raised); padding: 14px 16px; margin: 24px 0 0; }
+    .next-step .k { color: var(--ink-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+    .next-step a { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; text-transform: lowercase; }
+    .next-step p { margin: 4px 0 0; color: var(--ink-muted); font-size: 0.92rem; }
   </style>
 </head>
 <body>
@@ -126,21 +134,21 @@
     <section class="panel">
       <div class="inputs">
         <label class="field">Score you expect (this wave) <span class="suffix">%</span>
-          <input type="number" id="p" min="0.5" max="99.5" step="0.1" inputmode="decimal"></label>
+          <input autocomplete="off" type="number" id="p" min="0.5" max="99.5" step="0.1" inputmode="decimal"></label>
         <label class="field">Smallest move you need to see <span class="suffix">points</span>
-          <input type="number" id="d" min="0.5" max="50" step="0.5" inputmode="decimal"></label>
+          <input autocomplete="off" type="number" id="d" min="0.5" max="50" step="0.5" inputmode="decimal"></label>
         <label class="field">Respondents you can afford per wave
-          <input type="number" id="n" min="2" step="50" inputmode="numeric"></label>
+          <input autocomplete="off" type="number" id="n" min="2" step="50" inputmode="numeric"></label>
         <label class="field">Cost per completed respondent <span class="suffix">$, optional</span>
-          <input type="number" id="cost" min="0" step="0.5" inputmode="decimal"></label>
+          <input autocomplete="off" type="number" id="cost" min="0" step="0.5" inputmode="decimal"></label>
         <label class="field">Confidence
-          <select id="c"><option value="90">90%</option><option value="95" selected>95%</option><option value="99">99%</option></select></label>
+          <select autocomplete="off" id="c"><option value="90">90%</option><option value="95" selected>95%</option><option value="99">99%</option></select></label>
         <label class="field">Power
-          <select id="pw"><option value="80" selected>80%</option><option value="90">90%</option></select></label>
+          <select autocomplete="off" id="pw"><option value="80" selected>80%</option><option value="90">90%</option></select></label>
         <label class="field">Metrics you scan each wave
-          <input type="number" id="k" min="1" max="200" step="1" inputmode="numeric"></label>
+          <input autocomplete="off" type="number" id="k" min="1" max="200" step="1" inputmode="numeric"></label>
         <label class="field">Design effect (weighting)
-          <input type="number" id="de" min="1" max="5" step="0.1" inputmode="decimal"></label>
+          <input autocomplete="off" type="number" id="de" min="1" max="5" step="0.1" inputmode="decimal"></label>
       </div>
       <p class="hint">The score is the percent who say yes (aware, consider, would buy). Power is how often a real move of that size gets caught. Leave design effect at 1 if you do not know it. Scanning many metrics raises the bar, so a bigger sample is needed to keep the same power.</p>
       <div id="err" role="alert"></div>
@@ -198,6 +206,7 @@ z uses the Sidak correction when you scan k metrics: alpha = 1 - (1 - 0.05)^(1/k
       <p><b>Score levels matter.</b> Scores near 50% need the biggest samples. Scores near 0% or 100% need fewer, and the normal approximation gets shaky.</p>
     </section>
 
+    <section class="next-step"><div class="k">next</div><a href="https://tracker-wave-check.benjads.com/">tracker wave check</a><p>Waves in? Check whether the move is real or noise.</p></section>
     <footer class="site-foot">
       <picture><source media="(prefers-color-scheme: dark)" srcset="logo/benjads-footnote-paper-transparent.svg"><img src="logo/benjads-footnote-olive-transparent.svg" alt="ben.j.ads"></picture>
       <p><span class="tag">1</span>Two-proportion sample size with a Sidak correction for scanning several metrics. Simple random sample assumed. Marketing science, given away free, for people who spend money.</p>
